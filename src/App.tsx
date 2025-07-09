@@ -633,37 +633,28 @@ function App({ initialStep = 0 }: AppProps) {
     const results = calculateResults();
     
     return (
-      <div className="min-h-screen bg-[#191919] flex flex-col items-center justify-between p-4 relative overflow-hidden">
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-10 left-10 w-32 h-32 bg-[#ffd200]/5 rounded-full blur-xl animate-pulse"></div>
-          <div className="absolute top-40 right-20 w-24 h-24 bg-blue-500/5 rounded-full blur-xl animate-pulse delay-1000"></div>
-          <div className="absolute bottom-20 left-20 w-40 h-40 bg-green-500/5 rounded-full blur-xl animate-pulse delay-2000"></div>
-          <div className="absolute bottom-40 right-10 w-20 h-20 bg-purple-500/5 rounded-full blur-xl animate-pulse delay-500"></div>
-        </div>
-
-        <div className="max-w-4xl w-full relative z-10">
+      <div className="min-h-screen bg-[#191919] flex flex-col items-center justify-between p-4 relative">
+        <div className="max-w-4xl w-full">
           {/* Hero Section com Resultado */}
           <div className="relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#ffd200]/10 to-transparent animate-gradient-x"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-[#ffd200]/10 to-transparent"></div>
             <div className="relative max-w-6xl mx-auto px-4 py-16">
-              <div className="text-center mb-12 animate-fade-in-up">
+              <div className="text-center mb-12">
                 <div className="inline-flex items-center gap-2 bg-[#ffd200]/20 px-4 py-2 rounded-full mb-6 hover:bg-[#ffd200]/30 transition-all duration-300 hover:scale-105 cursor-default">
-                  <Trophy className="w-5 h-5 text-[#ffd200] animate-bounce" />
+                  <Trophy className="w-5 h-5 text-[#ffd200]" />
                   <span className="text-[#ffd200] font-semibold">DIAGNÓSTICO COMPLETO</span>
                 </div>
                 
-                <h1 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight animate-fade-in-up delay-200">
+                <h1 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
                   {getFirstName(quizData.nome || 'Advogado')}, este é o valor em contratos que você está 
-                  <span className="text-[#ffd200] animate-pulse"> deixando na mesa</span> todos os meses:
+                  <span className="text-[#ffd200]"> deixando na mesa</span> todos os meses:
                 </h1>
                 
-                <div className="relative inline-block animate-fade-in-up delay-400">
+                <div className="relative inline-block">
                   <div className="absolute -inset-4 bg-[#ffd200]/20 blur-xl rounded-full animate-pulse"></div>
-                  <div className="absolute -inset-6 bg-gradient-to-r from-[#ffd200]/10 to-transparent rounded-full animate-spin-slow"></div>
                   <div className="relative bg-gradient-to-r from-[#ffd200] to-[#ffdc33] text-[#191919] p-8 rounded-2xl shadow-2xl hover:shadow-[#ffd200]/20 hover:shadow-3xl transition-all duration-500 hover:scale-105 transform-gpu">
-                    <div className="text-2xl font-bold mb-2 animate-bounce">💰</div>
-                    <div className="text-4xl md:text-6xl font-black animate-number-count">
+                    <div className="text-2xl font-bold mb-2">💰</div>
+                    <div className="text-4xl md:text-6xl font-black">
                       {formatCurrency(results.valorDeixadoNaMesa)}
                     </div>
                     <div className="text-lg font-semibold mt-2 opacity-80">
@@ -675,7 +666,7 @@ function App({ initialStep = 0 }: AppProps) {
 
               {/* Métricas Visuais */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-                <div className="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-gray-700 hover:border-green-400/50 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-green-400/10 animate-fade-in-left delay-600 group">
+                <div className="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-gray-700 hover:border-green-400/50 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-green-400/10 group">
                   <div className="flex items-center gap-3 mb-3">
                     <CheckCircle className="w-8 h-8 text-green-400 group-hover:animate-pulse" />
                     <h3 className="text-xl font-bold text-white group-hover:text-green-400 transition-colors duration-300">Contratos</h3>
@@ -684,7 +675,7 @@ function App({ initialStep = 0 }: AppProps) {
                   <p className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300">novos contratos por mês</p>
                 </div>
 
-                <div className="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-gray-700 hover:border-blue-400/50 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-400/10 animate-fade-in-right delay-800 group">
+                <div className="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-gray-700 hover:border-blue-400/50 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-400/10 group">
                   <div className="flex items-center gap-3 mb-3">
                     <Zap className="w-8 h-8 text-blue-400 group-hover:animate-pulse" />
                     <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors duration-300">Potencial Total</h3>
@@ -698,16 +689,15 @@ function App({ initialStep = 0 }: AppProps) {
 
           {/* Seção de Problema/Solução */}
           <div className="bg-gray-900/50 py-16 relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#ffd200]/5 to-transparent animate-pulse"></div>
             <div className="max-w-4xl mx-auto px-4 relative z-10">
-              <div className="text-center mb-12 animate-fade-in-up delay-1000">
+              <div className="text-center mb-12">
                 <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 hover:text-[#ffd200] transition-colors duration-300">
                   A Verdade Que Ninguém Te Conta
                 </h2>
               </div>
 
               <div className="space-y-8 text-lg text-gray-300 leading-relaxed">
-                <div className="bg-gray-800/50 p-8 rounded-xl border-l-4 border-[#ffd200] hover:border-l-8 hover:bg-gray-800/70 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#ffd200]/10 animate-fade-in-up delay-1200 group">
+                <div className="bg-gray-800/50 p-8 rounded-xl border-l-4 border-[#ffd200] hover:border-l-8 hover:bg-gray-800/70 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#ffd200]/10 group">
                   <p className="text-xl mb-4 text-white font-semibold group-hover:text-[#ffd200] transition-colors duration-300">
                     Você já entendeu: <strong>não é sobre ser um bom advogado.</strong>
                   </p>
@@ -720,7 +710,7 @@ function App({ initialStep = 0 }: AppProps) {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="space-y-6 animate-fade-in-left delay-1400">
+                  <div className="space-y-6">
                     <p className="hover:text-gray-100 transition-colors duration-300">
                       Você estudou. Se formou. Fez pós, especializações, se dedicou à sua área...
                       <br />
@@ -736,7 +726,7 @@ function App({ initialStep = 0 }: AppProps) {
                     </p>
                   </div>
 
-                  <div className="bg-red-900/30 p-6 rounded-xl border border-red-500/30 hover:border-red-400/50 hover:bg-red-900/40 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-red-500/20 animate-fade-in-right delay-1600 group">
+                  <div className="bg-red-900/30 p-6 rounded-xl border border-red-500/30 hover:border-red-400/50 hover:bg-red-900/40 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-red-500/20 group">
                     <div className="text-center">
                       <div className="text-4xl mb-4 group-hover:animate-bounce">🛑</div>
                       <h2 className="text-[#ff4444] text-2xl font-bold mb-2 text-center group-hover:text-red-300 transition-colors duration-300">
@@ -746,7 +736,7 @@ function App({ initialStep = 0 }: AppProps) {
                   </div>
                 </div>
 
-                <div className="bg-gray-800/50 p-8 rounded-xl hover:bg-gray-800/70 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-gray-800/50 animate-fade-in-up delay-1400 group">
+                <div className="bg-gray-800/50 p-8 rounded-xl hover:bg-gray-800/70 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-gray-800/50 group">
                   <p className="text-xl mb-6 text-center group-hover:text-gray-100 transition-colors duration-300">
                     Não por falta de conhecimento jurídico.
                     <br />
@@ -769,7 +759,7 @@ function App({ initialStep = 0 }: AppProps) {
                   </div>
                 </div>
 
-                <div className="text-center bg-gray-800/50 p-8 rounded-xl hover:bg-gray-800/70 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-gray-800/50 animate-fade-in-up delay-1600 group">
+                <div className="text-center bg-gray-800/50 p-8 rounded-xl hover:bg-gray-800/70 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-gray-800/50 group">
                   <p className="text-xl mb-4 group-hover:text-gray-100 transition-colors duration-300">
                     Hoje, sua autoridade é <strong>jurídica</strong>.
                     <br />
@@ -783,7 +773,7 @@ function App({ initialStep = 0 }: AppProps) {
                   </p>
                 </div>
 
-                <div className="bg-gradient-to-r from-[#ffd200]/10 to-transparent p-8 rounded-xl border border-[#ffd200]/30 hover:border-[#ffd200]/50 hover:bg-gradient-to-r hover:from-[#ffd200]/15 hover:to-transparent transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#ffd200]/10 animate-fade-in-up delay-1800">
+                <div className="bg-gradient-to-r from-[#ffd200]/10 to-transparent p-8 rounded-xl border border-[#ffd200]/30 hover:border-[#ffd200]/50 hover:bg-gradient-to-r hover:from-[#ffd200]/15 hover:to-transparent transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#ffd200]/10">
                   <div className="space-y-4 text-white">
                     <div className="flex items-center gap-2 hover:translate-x-2 transition-transform duration-300 group">
                       <X className="text-red-500 w-6 h-6 flex-shrink-0 group-hover:animate-pulse" />
@@ -806,14 +796,14 @@ function App({ initialStep = 0 }: AppProps) {
                       </p>
                     </div>
 
-                    <div className="mt-6 text-center mb-16 animate-fade-in-up delay-2000">
+                    <div className="mt-6 text-center mb-16">
                       <p className="text-lg hover:text-gray-100 transition-colors duration-300">
                         📝 E é exatamente isso que <strong>nós podemos te mostrar.</strong>
                       </p>
                     </div>
                   </div>
 
-                  <div className="text-center bg-green-900/20 p-8 rounded-xl border border-green-500/30 mt-8 hover:border-green-400/50 hover:bg-green-900/30 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-green-500/20 animate-fade-in-up delay-2200 group">
+                  <div className="text-center bg-green-900/20 p-8 rounded-xl border border-green-500/30 mt-8 hover:border-green-400/50 hover:bg-green-900/30 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-green-500/20 group">
                     <p className="text-xl font-bold text-green-400 mb-4 group-hover:text-green-300 transition-colors duration-300">
                       ✅ Já ajudamos dezenas de advogados a crescer.
                     </p>
@@ -827,10 +817,9 @@ function App({ initialStep = 0 }: AppProps) {
           </div>
 
           {/* CTA Final */}
-          <div className="bg-gradient-to-r from-[#ffd200]/20 to-transparent py-16 relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-r from-green-500/5 via-transparent to-green-500/5 animate-pulse"></div>
-            <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
-              <div className="mb-8 animate-fade-in-up delay-2400">
+          <div className="bg-gradient-to-r from-[#ffd200]/20 to-transparent py-16">
+            <div className="max-w-4xl mx-auto px-4 text-center">
+              <div className="mb-8">
                 <h3 className="text-3xl md:text-4xl font-bold text-white mb-4 hover:text-green-400 transition-colors duration-300">
                   💬 Quer aplicar isso no seu escritório?
                 </h3>
@@ -839,21 +828,19 @@ function App({ initialStep = 0 }: AppProps) {
                 </p>
               </div>
               
-              <div className="relative inline-block animate-fade-in-up delay-2600">
-                <div className="absolute -inset-2 bg-green-500/20 blur-lg rounded-xl animate-pulse"></div>
-                <div className="absolute -inset-4 bg-gradient-to-r from-green-500/10 to-transparent rounded-xl animate-ping"></div>
+              <div className="relative inline-block">
                 <a
                   href="https://wa.me/5511963443866?text=Ola%2C%20preenchi%20o%20Quiz%20e%20quero%20conhecer%20mais%20detalhes%20sobre%20a%20Assessoria%20em%20Marketing%20Jur%C3%ADdico%20da%20Digge"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative bg-green-600 text-white px-6 py-4 rounded-xl font-bold text-lg hover:bg-green-700 transition-all duration-300 flex items-center gap-3 mx-auto shadow-xl transform hover:scale-110 hover:shadow-green-500/30 group"
+                  className="bg-green-600 text-white px-6 py-4 rounded-xl font-bold text-lg hover:bg-green-700 transition-all duration-300 flex items-center gap-3 mx-auto shadow-xl hover:animate-pulse group"
                 >
-                  <MessageCircle className="w-6 h-6 group-hover:animate-bounce" />
+                  <MessageCircle className="w-6 h-6" />
                   Falar com um Especialista no WhatsApp
                 </a>
               </div>
 
-              <p className="text-gray-400 mt-6 text-sm hover:text-gray-300 transition-colors duration-300 animate-fade-in-up delay-2800">
+              <p className="text-gray-400 mt-6 text-sm hover:text-gray-300 transition-colors duration-300">
                 🔒 Conversa 100% confidencial e sem compromisso
               </p>
             </div>
