@@ -5,11 +5,11 @@ import { addUTMsToLinks, getUTMParams } from './utmHandler';
 
 function Footer() {
   return (
-    <div className="absolute bottom-0 left-0 right-0 p-4 flex flex-col items-center justify-center">
+    <div className="absolute bottom-0 left-0 right-0 p-4 flex flex-col items-center justify-center mb-12">
       <img 
         src="https://digge.com.br/wp-content/uploads/2024/11/Logo.png" 
         alt="Digge Logo" 
-        className="h-8 mb-2"
+        className="h-6 mb-6"
       />
       <p className="text-gray-500 text-sm">CNPJ: 49.139.333/0001-95</p>
     </div>
@@ -32,19 +32,14 @@ interface AppProps {
 }
 
 const AREA_CPL_MAP: Record<string, number> = {
-  'Trabalhista': 25,
-  'Previdenciário': 22.06,
-  'Direito da Saúde': 81.94,
-  'Consumidor': 33.12,
-  'Administrativo': 27.76,
-  'Trânsito': 39.41,
-  'Tributário': 56.71,
-  'Empresarial': 64.76,
-  'Imobiliário': 57.65,
-  'Direito Digital': 20.00,
-  'Sucessões': 15.88,
-  'Família': 57.94,
-  'Criminal': 87.35,
+  'PREVIDENCIÁRIO': 22.06,
+  'BANCÁRIO/CONSUMIDOR': 33.12,
+  'TRABALHISTA': 25,
+  'FAMÍLIA': 57.94,
+  'CRIMINAL': 87.35,
+  'TRIBUTÁRIO': 56.71,
+  'EMPRESARIAL': 64.76,
+  'OUTROS': 22.06,
 };
 
 const FATURAMENTO_MAP: Record<string, number> = {
@@ -68,6 +63,8 @@ function App({ initialStep = 0 }: AppProps) {
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [investimentoDisplay, setInvestimentoDisplay] = useState('');
   const [ticketDisplay, setTicketDisplay] = useState('');
+  const [whatsappError, setWhatsappError] = useState('');
+  const [emailError, setEmailError] = useState('');
   const [quizData, setQuizData] = useState<QuizData>({
     area: '',
     investimento: 0,
@@ -168,6 +165,46 @@ function App({ initialStep = 0 }: AppProps) {
   const parseCurrencyInput = (value: string) => {
     const numbers = value.replace(/\D/g, '');
     return numbers ? parseInt(numbers) : 0;
+  };
+
+  const formatWhatsApp = (value: string) => {
+    // Remove tudo que não é número
+    const numbers = value.replace(/\D/g, '');
+    
+    // Aplica a máscara
+    if (numbers.length <= 2) {
+      return numbers;
+    } else if (numbers.length <= 7) {
+      return `(${numbers.slice(0, 2)}) ${numbers.slice(2)}`;
+    } else if (numbers.length <= 11) {
+      return `(${numbers.slice(0, 2)}) ${numbers.slice(2, 7)}-${numbers.slice(7)}`;
+    } else {
+      return `(${numbers.slice(0, 2)}) ${numbers.slice(2, 7)}-${numbers.slice(7, 11)}`;
+    }
+  };
+
+  const validateWhatsApp = (number: string) => {
+    const numbers = number.replace(/\D/g, '');
+    if (numbers.length !== 11) {
+      setWhatsappError('Insira um número válido com DDD (11 dígitos)');
+      return false;
+    }
+    setWhatsappError('');
+    return true;
+  };
+
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setEmailError('Por favor, insira um email válido');
+      return false;
+    }
+    setEmailError('');
+    return true;
+  };
+
+  const getFirstName = (fullName: string) => {
+    return fullName.split(' ')[0];
   };
 
   const nextStep = () => {
@@ -560,9 +597,15 @@ function App({ initialStep = 0 }: AppProps) {
                 type="email"
                 placeholder="seu@email.com"
                 value={quizData.email}
-                onChange={(e) => setQuizData({ ...quizData, email: e.target.value })}
-                className="w-full p-4 bg-gray-700 text-white rounded-lg border border-gray-600 focus:border-[#ffd200] focus:outline-none text-lg"
+                onChange={(e) => {
+                  setQuizData({ ...quizData, email: e.target.value });
+                  validateEmail(e.target.value);
+                }}
+                className={`w-full p-4 bg-gray-700 text-white rounded-lg border ${emailError ? 'border-red-500' : 'border-gray-600'} focus:border-[#ffd200] focus:outline-none text-lg`}
               />
+              {emailError && (
+                <p className="text-red-500 text-sm mt-1">{emailError}</p>
+              )}
             </div>
 
             <div>
@@ -571,18 +614,27 @@ function App({ initialStep = 0 }: AppProps) {
                 type="tel"
                 placeholder="(11) 99999-9999"
                 value={quizData.whatsapp}
-                onChange={(e) => setQuizData({ ...quizData, whatsapp: e.target.value })}
-                className="w-full p-4 bg-gray-700 text-white rounded-lg border border-gray-600 focus:border-[#ffd200] focus:outline-none text-lg"
+                onChange={(e) => {
+                  const formatted = formatWhatsApp(e.target.value);
+                  setQuizData({ ...quizData, whatsapp: formatted });
+                  validateWhatsApp(formatted);
+                }}
+                className={`w-full p-4 bg-gray-700 text-white rounded-lg border ${whatsappError ? 'border-red-500' : 'border-gray-600'} focus:border-[#ffd200] focus:outline-none text-lg`}
               />
+              {whatsappError && (
+                <p className="text-red-500 text-sm mt-1">{whatsappError}</p>
+              )}
             </div>
             
             <button
               onClick={() => {
-                setCurrentStep(8); // Vai para resultado final
-                sendWebhook();
-                navigate('/resultado');
+                if (validateWhatsApp(quizData.whatsapp) && validateEmail(quizData.email)) {
+                  setCurrentStep(8); // Vai para resultado final
+                  sendWebhook();
+                  navigate('/resultado');
+                }
               }}
-              disabled={!quizData.nome || !quizData.email || !quizData.whatsapp || isLoading}
+              disabled={!quizData.nome || !quizData.email || !quizData.whatsapp || isLoading || !!whatsappError || !!emailError}
               className="w-full bg-[#ffd200] text-[#191919] p-4 rounded-lg font-bold text-lg hover:bg-[#ffdc33] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 mt-6"
             >
               {isLoading ? 'Processando...' : 'Ver Resultado'}
@@ -600,7 +652,7 @@ function App({ initialStep = 0 }: AppProps) {
     const results = calculateResults();
     
     return (
-      <div className="min-h-screen bg-[#191919] flex items-center justify-center p-4 relative">
+      <div className="min-h-screen bg-[#191919] flex flex-col items-center justify-between p-4 relative">
         <div className="max-w-4xl w-full">
           {/* Hero Section com Resultado */}
           <div className="relative overflow-hidden">
@@ -613,7 +665,7 @@ function App({ initialStep = 0 }: AppProps) {
                 </div>
                 
                 <h1 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
-                  {quizData.nome || 'Advogado'}, este é o valor em contratos que você está 
+                  {getFirstName(quizData.nome || 'Advogado')}, este é o valor em contratos que você está 
                   <span className="text-[#ffd200]"> deixando na mesa</span> todos os meses:
                 </h1>
                 
@@ -763,7 +815,7 @@ function App({ initialStep = 0 }: AppProps) {
                       </p>
                     </div>
 
-                    <div className="mt-6 text-center">
+                    <div className="mt-6 text-center mb-12">
                       <p className="text-lg">
                         📝 E é exatamente isso que <strong>nós podemos te mostrar.</strong>
                       </p>
@@ -801,9 +853,9 @@ function App({ initialStep = 0 }: AppProps) {
                   href="https://wa.me/5511963443866?text=Ola%2C%20preenchi%20o%20Quiz%20e%20quero%20conhecer%20mais%20detalhes%20sobre%20a%20Assessoria%20em%20Marketing%20Jur%C3%ADdico%20da%20Digge"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative bg-green-600 text-white px-8 py-6 rounded-xl font-bold text-xl hover:bg-green-700 transition-all duration-300 flex items-center gap-3 mx-auto shadow-2xl transform hover:scale-105"
+                  className="relative bg-green-600 text-white px-4 py-3 rounded-xl font-bold text-base hover:bg-green-700 transition-all duration-300 flex items-center gap-2 mx-auto shadow-xl transform hover:scale-105"
                 >
-                  <MessageCircle className="w-8 h-8" />
+                  <MessageCircle className="w-5 h-5" />
                   Falar com um Especialista no WhatsApp
                 </a>
               </div>
@@ -814,7 +866,17 @@ function App({ initialStep = 0 }: AppProps) {
             </div>
           </div>
         </div>
-        <Footer />
+
+        <div className="w-full bg-[#191919] py-8 mt-16">
+          <div className="max-w-4xl mx-auto flex flex-col items-center justify-center">
+            <img 
+              src="https://digge.com.br/wp-content/uploads/2024/11/Logo.png" 
+              alt="Digge Logo" 
+              className="h-8 mb-4"
+            />
+            <p className="text-gray-500 text-sm">CNPJ: 49.139.333/0001-95</p>
+          </div>
+        </div>
       </div>
     );
   }
