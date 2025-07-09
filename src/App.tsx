@@ -49,7 +49,7 @@ const TAXA_CONVERSAO_MAP: Record<string, number> = {
   'Ruim': 0.12,
 };
 
-function App({ initialStep = 1 }: AppProps) {
+function App({ initialStep = 0 }: AppProps) {
   const [currentStep, setCurrentStep] = useState(initialStep);
   const [isLoading, setIsLoading] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
