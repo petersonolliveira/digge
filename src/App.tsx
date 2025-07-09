@@ -637,7 +637,6 @@ function App({ initialStep = 0 }: AppProps) {
         <div className="max-w-4xl w-full">
           {/* Hero Section com Resultado */}
           <div className="relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#ffd200]/10 to-transparent"></div>
             <div className="relative max-w-6xl mx-auto px-4 py-16">
               <div className="text-center mb-12">
                 <div className="inline-flex items-center gap-2 bg-[#ffd200]/20 px-4 py-2 rounded-full mb-6 hover:bg-[#ffd200]/30 transition-all duration-300 hover:scale-105 cursor-default">
@@ -698,13 +697,13 @@ function App({ initialStep = 0 }: AppProps) {
 
               <div className="space-y-8 text-lg text-gray-300 leading-relaxed">
                 <div className="bg-gray-800/50 p-8 rounded-xl border-l-4 border-[#ffd200] hover:border-l-8 hover:bg-gray-800/70 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#ffd200]/10 group">
-                  <p className="text-xl mb-4 text-white font-semibold group-hover:text-[#ffd200] transition-colors duration-300">
+                  <p className="text-xl mb-4 text-white font-semibold">
                     Você já entendeu: <strong>não é sobre ser um bom advogado.</strong>
                   </p>
-                  <p className="text-xl mb-4 group-hover:text-gray-100 transition-colors duration-300">
-                    É sobre <strong className="text-[#ffd200] group-hover:animate-pulse">ser percebido como insubstituível.</strong>
+                  <p className="text-xl mb-4">
+                    É sobre <strong className="text-[#ffd200]">ser percebido como insubstituível.</strong>
                   </p>
-                  <p className="text-xl group-hover:text-gray-100 transition-colors duration-300">
+                  <p className="text-xl">
                     E hoje… você ainda parece <strong>só mais um na multidão.</strong>
                   </p>
                 </div>
@@ -737,77 +736,77 @@ function App({ initialStep = 0 }: AppProps) {
                 </div>
 
                 <div className="bg-gray-800/50 p-8 rounded-xl hover:bg-gray-800/70 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-gray-800/50 group">
-                  <p className="text-xl mb-6 text-center group-hover:text-gray-100 transition-colors duration-300">
+                  <p className="text-xl mb-6 text-center">
                     Não por falta de conhecimento jurídico.
                     <br />
-                    Mas por falta de <strong className="text-[#ffd200] group-hover:animate-pulse">estrutura.</strong>
+                    Mas por falta de <strong className="text-[#ffd200]">estrutura.</strong>
                   </p>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="flex items-start gap-3 p-4 bg-red-900/20 rounded-lg hover:bg-red-900/30 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-red-500/20 group">
-                      <span className="text-red-400 text-xl group-hover:animate-pulse">❌</span>
-                      <span className="group-hover:text-gray-100 transition-colors duration-300">Falta um processo previsível para atrair os clientes certos</span>
+                      <span className="text-red-400 text-xl">❌</span>
+                      <span>Falta um processo previsível para atrair os clientes certos</span>
                     </div>
                     <div className="flex items-start gap-3 p-4 bg-red-900/20 rounded-lg hover:bg-red-900/30 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-red-500/20 group delay-100">
-                      <span className="text-red-400 text-xl group-hover:animate-pulse">❌</span>
-                      <span className="group-hover:text-gray-100 transition-colors duration-300">Falta uma oferta que mostre o valor do seu serviço</span>
+                      <span className="text-red-400 text-xl">❌</span>
+                      <span>Falta uma oferta que mostre o valor do seu serviço</span>
                     </div>
                     <div className="flex items-start gap-3 p-4 bg-red-900/20 rounded-lg hover:bg-red-900/30 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-red-500/20 group delay-200">
-                      <span className="text-red-400 text-xl group-hover:animate-pulse">❌</span>
-                      <span className="group-hover:text-gray-100 transition-colors duration-300">Falta um posicionamento estratégico para te fazer visto como referência absoluta</span>
+                      <span className="text-red-400 text-xl">❌</span>
+                      <span>Falta um posicionamento estratégico para te fazer visto como referência absoluta</span>
                     </div>
                   </div>
                 </div>
 
                 <div className="text-center bg-gray-800/50 p-8 rounded-xl hover:bg-gray-800/70 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-gray-800/50 group">
-                  <p className="text-xl mb-4 group-hover:text-gray-100 transition-colors duration-300">
+                  <p className="text-xl mb-4">
                     Hoje, sua autoridade é <strong>jurídica</strong>.
                     <br />
-                    Mas o cliente compra <strong className="text-[#ffd200] group-hover:animate-pulse">percepção de valor</strong>.
+                    Mas o cliente compra <strong className="text-[#ffd200]">percepção de valor</strong>.
                   </p>
                   
-                  <p className="text-lg group-hover:text-gray-100 transition-colors duration-300">
+                  <p className="text-lg">
                     E por mais que você se esforce, hoje você ainda é visto <strong>como mais um</strong>…
                     <br />
-                    … e não como <strong className="text-[#ffd200] group-hover:animate-pulse">o único caminho seguro</strong> para o resultado que ele quer.
+                    … e não como <strong className="text-[#ffd200]">o único caminho seguro</strong> para o resultado que ele quer.
                   </p>
                 </div>
 
                 <div className="bg-gradient-to-r from-[#ffd200]/10 to-transparent p-8 rounded-xl border border-[#ffd200]/30 hover:border-[#ffd200]/50 hover:bg-gradient-to-r hover:from-[#ffd200]/15 hover:to-transparent transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#ffd200]/10">
                   <div className="space-y-4 text-white">
                     <div className="flex items-center gap-2 hover:translate-x-2 transition-transform duration-300 group">
-                      <X className="text-red-500 w-6 h-6 flex-shrink-0 group-hover:animate-pulse" />
-                      <p className="text-lg group-hover:text-gray-100">O problema <span className="font-bold">não</span> é o Google.</p>
+                      <X className="text-red-500 w-6 h-6 flex-shrink-0" />
+                      <p className="text-lg">O problema <span className="font-bold">não</span> é o Google.</p>
                     </div>
                     
                     <div className="flex items-center gap-2 hover:translate-x-2 transition-transform duration-300 delay-100 group">
-                      <X className="text-red-500 w-6 h-6 flex-shrink-0 group-hover:animate-pulse" />
-                      <p className="text-lg group-hover:text-gray-100">O problema <span className="font-bold">não</span> é o Instagram.</p>
+                      <X className="text-red-500 w-6 h-6 flex-shrink-0" />
+                      <p className="text-lg">O problema <span className="font-bold">não</span> é o Instagram.</p>
                     </div>
                     
                     <div className="flex items-center gap-2 hover:translate-x-2 transition-transform duration-300 delay-200 group">
-                      <X className="text-red-500 w-6 h-6 flex-shrink-0 group-hover:animate-pulse" />
-                      <p className="text-lg group-hover:text-gray-100">O problema <span className="font-bold">não</span> é você.</p>
+                      <X className="text-red-500 w-6 h-6 flex-shrink-0" />
+                      <p className="text-lg">O problema <span className="font-bold">não</span> é você.</p>
                     </div>
 
                     <div className="bg-[#ffd200]/20 p-4 rounded-lg mt-6 hover:bg-[#ffd200]/30 transition-all duration-300 hover:scale-105 group">
-                      <p className="text-lg text-[#ffd200] group-hover:text-[#ffdc33]">
+                      <p className="text-lg text-[#ffd200]">
                         O problema é a ausência de um <strong>modelo de crescimento previsível e lucrativo.</strong>
                       </p>
                     </div>
 
                     <div className="mt-6 text-center mb-16">
-                      <p className="text-lg hover:text-gray-100 transition-colors duration-300">
+                      <p className="text-lg">
                         📝 E é exatamente isso que <strong>nós podemos te mostrar.</strong>
                       </p>
                     </div>
                   </div>
 
                   <div className="text-center bg-green-900/20 p-8 rounded-xl border border-green-500/30 mt-8 hover:border-green-400/50 hover:bg-green-900/30 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-green-500/20 group">
-                    <p className="text-xl font-bold text-green-400 mb-4 group-hover:text-green-300 transition-colors duration-300">
+                    <p className="text-xl font-bold text-green-400 mb-4">
                       ✅ Já ajudamos dezenas de advogados a crescer.
                     </p>
-                    <p className="text-lg group-hover:text-gray-100 transition-colors duration-300">
+                    <p className="text-lg">
                       E a boa notícia é: <strong>você pode acessar o mesmo caminho agora.</strong>
                     </p>
                   </div>
@@ -817,13 +816,13 @@ function App({ initialStep = 0 }: AppProps) {
           </div>
 
           {/* CTA Final */}
-          <div className="bg-gradient-to-r from-[#ffd200]/20 to-transparent py-16">
+          <div className="py-16">
             <div className="max-w-4xl mx-auto px-4 text-center">
               <div className="mb-8">
-                <h3 className="text-3xl md:text-4xl font-bold text-white mb-4 hover:text-green-400 transition-colors duration-300">
+                <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
                   💬 Quer aplicar isso no seu escritório?
                 </h3>
-                <p className="text-xl text-gray-300 mb-8 hover:text-gray-100 transition-colors duration-300">
+                <p className="text-xl text-gray-300 mb-8">
                   👇 Clique abaixo para falar com um especialista e agendar um horário:
                 </p>
               </div>
@@ -833,14 +832,14 @@ function App({ initialStep = 0 }: AppProps) {
                   href="https://wa.me/5511963443866?text=Ola%2C%20preenchi%20o%20Quiz%20e%20quero%20conhecer%20mais%20detalhes%20sobre%20a%20Assessoria%20em%20Marketing%20Jur%C3%ADdico%20da%20Digge"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-green-600 text-white px-6 py-4 rounded-xl font-bold text-lg hover:bg-green-700 transition-all duration-300 flex items-center gap-3 mx-auto shadow-xl hover:animate-pulse group"
+                  className="bg-green-600 text-white px-6 py-4 rounded-xl font-bold text-lg hover:bg-green-700 transition-colors duration-300 flex items-center gap-3 mx-auto shadow-xl"
                 >
                   <MessageCircle className="w-6 h-6" />
                   Falar com um Especialista no WhatsApp
                 </a>
               </div>
 
-              <p className="text-gray-400 mt-6 text-sm hover:text-gray-300 transition-colors duration-300">
+              <p className="text-gray-400 mt-6 text-sm">
                 🔒 Conversa 100% confidencial e sem compromisso
               </p>
             </div>
