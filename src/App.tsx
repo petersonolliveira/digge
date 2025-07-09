@@ -633,28 +633,37 @@ function App({ initialStep = 0 }: AppProps) {
     const results = calculateResults();
     
     return (
-      <div className="min-h-screen bg-[#191919] flex flex-col items-center justify-between p-4 relative">
-        <div className="max-w-4xl w-full">
+      <div className="min-h-screen bg-[#191919] flex flex-col items-center justify-between p-4 relative overflow-hidden">
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-10 left-10 w-32 h-32 bg-[#ffd200]/5 rounded-full blur-xl animate-pulse"></div>
+          <div className="absolute top-40 right-20 w-24 h-24 bg-blue-500/5 rounded-full blur-xl animate-pulse delay-1000"></div>
+          <div className="absolute bottom-20 left-20 w-40 h-40 bg-green-500/5 rounded-full blur-xl animate-pulse delay-2000"></div>
+          <div className="absolute bottom-40 right-10 w-20 h-20 bg-purple-500/5 rounded-full blur-xl animate-pulse delay-500"></div>
+        </div>
+
+        <div className="max-w-4xl w-full relative z-10">
           {/* Hero Section com Resultado */}
           <div className="relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#ffd200]/10 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-[#ffd200]/10 to-transparent animate-gradient-x"></div>
             <div className="relative max-w-6xl mx-auto px-4 py-16">
-              <div className="text-center mb-12">
-                <div className="inline-flex items-center gap-2 bg-[#ffd200]/20 px-4 py-2 rounded-full mb-6">
-                  <Trophy className="w-5 h-5 text-[#ffd200]" />
+              <div className="text-center mb-12 animate-fade-in-up">
+                <div className="inline-flex items-center gap-2 bg-[#ffd200]/20 px-4 py-2 rounded-full mb-6 hover:bg-[#ffd200]/30 transition-all duration-300 hover:scale-105 cursor-default">
+                  <Trophy className="w-5 h-5 text-[#ffd200] animate-bounce" />
                   <span className="text-[#ffd200] font-semibold">DIAGNÓSTICO COMPLETO</span>
                 </div>
                 
-                <h1 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                <h1 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight animate-fade-in-up delay-200">
                   {getFirstName(quizData.nome || 'Advogado')}, este é o valor em contratos que você está 
-                  <span className="text-[#ffd200]"> deixando na mesa</span> todos os meses:
+                  <span className="text-[#ffd200] animate-pulse"> deixando na mesa</span> todos os meses:
                 </h1>
                 
-                <div className="relative inline-block">
+                <div className="relative inline-block animate-fade-in-up delay-400">
                   <div className="absolute -inset-4 bg-[#ffd200]/20 blur-xl rounded-full animate-pulse"></div>
-                  <div className="relative bg-gradient-to-r from-[#ffd200] to-[#ffdc33] text-[#191919] p-8 rounded-2xl shadow-2xl">
-                    <div className="text-2xl font-bold mb-2">💰</div>
-                    <div className="text-4xl md:text-6xl font-black">
+                  <div className="absolute -inset-6 bg-gradient-to-r from-[#ffd200]/10 to-transparent rounded-full animate-spin-slow"></div>
+                  <div className="relative bg-gradient-to-r from-[#ffd200] to-[#ffdc33] text-[#191919] p-8 rounded-2xl shadow-2xl hover:shadow-[#ffd200]/20 hover:shadow-3xl transition-all duration-500 hover:scale-105 transform-gpu">
+                    <div className="text-2xl font-bold mb-2 animate-bounce">💰</div>
+                    <div className="text-4xl md:text-6xl font-black animate-number-count">
                       {formatCurrency(results.valorDeixadoNaMesa)}
                     </div>
                     <div className="text-lg font-semibold mt-2 opacity-80">
@@ -666,148 +675,149 @@ function App({ initialStep = 0 }: AppProps) {
 
               {/* Métricas Visuais */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-                <div className="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-gray-700">
+                <div className="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-gray-700 hover:border-green-400/50 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-green-400/10 animate-fade-in-left delay-600 group">
                   <div className="flex items-center gap-3 mb-3">
-                    <CheckCircle className="w-8 h-8 text-green-400" />
-                    <h3 className="text-xl font-bold text-white">Contratos</h3>
+                    <CheckCircle className="w-8 h-8 text-green-400 group-hover:animate-pulse" />
+                    <h3 className="text-xl font-bold text-white group-hover:text-green-400 transition-colors duration-300">Contratos</h3>
                   </div>
-                  <div className="text-3xl font-bold text-green-400 mb-2">{results.contratosPosse}</div>
-                  <p className="text-gray-400">novos contratos por mês</p>
+                  <div className="text-3xl font-bold text-green-400 mb-2 group-hover:scale-110 transition-transform duration-300">{results.contratosPosse}</div>
+                  <p className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300">novos contratos por mês</p>
                 </div>
 
-                <div className="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-gray-700">
+                <div className="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-gray-700 hover:border-blue-400/50 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-400/10 animate-fade-in-right delay-800 group">
                   <div className="flex items-center gap-3 mb-3">
-                    <Zap className="w-8 h-8 text-blue-400" />
-                    <h3 className="text-xl font-bold text-white">Potencial Total</h3>
+                    <Zap className="w-8 h-8 text-blue-400 group-hover:animate-pulse" />
+                    <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors duration-300">Potencial Total</h3>
                   </div>
-                  <div className="text-2xl font-bold text-blue-400 mb-2">{formatCurrency(results.faturamentoPotencial)}</div>
-                  <p className="text-gray-400">faturamento mensal possível</p>
+                  <div className="text-2xl font-bold text-blue-400 mb-2 group-hover:scale-110 transition-transform duration-300">{formatCurrency(results.faturamentoPotencial)}</div>
+                  <p className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300">faturamento mensal possível</p>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Seção de Problema/Solução */}
-          <div className="bg-gray-900/50 py-16">
-            <div className="max-w-4xl mx-auto px-4">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+          <div className="bg-gray-900/50 py-16 relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#ffd200]/5 to-transparent animate-pulse"></div>
+            <div className="max-w-4xl mx-auto px-4 relative z-10">
+              <div className="text-center mb-12 animate-fade-in-up delay-1000">
+                <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 hover:text-[#ffd200] transition-colors duration-300">
                   A Verdade Que Ninguém Te Conta
                 </h2>
               </div>
 
               <div className="space-y-8 text-lg text-gray-300 leading-relaxed">
-                <div className="bg-gray-800/50 p-8 rounded-xl border-l-4 border-[#ffd200]">
-                  <p className="text-xl mb-4 text-white font-semibold">
+                <div className="bg-gray-800/50 p-8 rounded-xl border-l-4 border-[#ffd200] hover:border-l-8 hover:bg-gray-800/70 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#ffd200]/10 animate-fade-in-up delay-1200 group">
+                  <p className="text-xl mb-4 text-white font-semibold group-hover:text-[#ffd200] transition-colors duration-300">
                     Você já entendeu: <strong>não é sobre ser um bom advogado.</strong>
                   </p>
-                  <p className="text-xl mb-4">
-                    É sobre <strong className="text-[#ffd200]">ser percebido como insubstituível.</strong>
+                  <p className="text-xl mb-4 group-hover:text-gray-100 transition-colors duration-300">
+                    É sobre <strong className="text-[#ffd200] group-hover:animate-pulse">ser percebido como insubstituível.</strong>
                   </p>
-                  <p className="text-xl">
+                  <p className="text-xl group-hover:text-gray-100 transition-colors duration-300">
                     E hoje… você ainda parece <strong>só mais um na multidão.</strong>
                   </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="space-y-6">
-                    <p>
+                  <div className="space-y-6 animate-fade-in-left delay-1400">
+                    <p className="hover:text-gray-100 transition-colors duration-300">
                       Você estudou. Se formou. Fez pós, especializações, se dedicou à sua área...
                       <br />
                       Mas ainda <strong>depende do acaso ou de indicações</strong> para manter o escritório girando.
                     </p>
 
-                    <p>
+                    <p className="hover:text-gray-100 transition-colors duration-300">
                       Enquanto isso, tem colegas com <strong>menos experiência</strong>, <strong>menos formação</strong>...
                     </p>
 
-                    <p className="text-2xl text-[#ffd200] font-bold">
+                    <p className="text-2xl text-[#ffd200] font-bold hover:scale-105 transition-transform duration-300 cursor-default">
                       …<strong>faturando 3x mais que você</strong>.
                     </p>
                   </div>
 
-                  <div className="bg-red-900/30 p-6 rounded-xl border border-red-500/30">
+                  <div className="bg-red-900/30 p-6 rounded-xl border border-red-500/30 hover:border-red-400/50 hover:bg-red-900/40 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-red-500/20 animate-fade-in-right delay-1600 group">
                     <div className="text-center">
-                      <div className="text-4xl mb-4">🛑</div>
-                      <h2 className="text-[#ff4444] text-2xl font-bold mb-2 text-center">
+                      <div className="text-4xl mb-4 group-hover:animate-bounce">🛑</div>
+                      <h2 className="text-[#ff4444] text-2xl font-bold mb-2 text-center group-hover:text-red-300 transition-colors duration-300">
                         VOCÊ ESTÁ DEIXANDO DINHEIRO NA MESA TODOS OS MESES.
                       </h2>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-gray-800/50 p-8 rounded-xl">
-                  <p className="text-xl mb-6 text-center">
+                <div className="bg-gray-800/50 p-8 rounded-xl hover:bg-gray-800/70 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-gray-800/50 animate-fade-in-up delay-1400 group">
+                  <p className="text-xl mb-6 text-center group-hover:text-gray-100 transition-colors duration-300">
                     Não por falta de conhecimento jurídico.
                     <br />
-                    Mas por falta de <strong className="text-[#ffd200]">estrutura.</strong>
+                    Mas por falta de <strong className="text-[#ffd200] group-hover:animate-pulse">estrutura.</strong>
                   </p>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="flex items-start gap-3 p-4 bg-red-900/20 rounded-lg">
-                      <span className="text-red-400 text-xl">❌</span>
-                      <span>Falta um processo previsível para atrair os clientes certos</span>
+                    <div className="flex items-start gap-3 p-4 bg-red-900/20 rounded-lg hover:bg-red-900/30 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-red-500/20 group">
+                      <span className="text-red-400 text-xl group-hover:animate-pulse">❌</span>
+                      <span className="group-hover:text-gray-100 transition-colors duration-300">Falta um processo previsível para atrair os clientes certos</span>
                     </div>
-                    <div className="flex items-start gap-3 p-4 bg-red-900/20 rounded-lg">
-                      <span className="text-red-400 text-xl">❌</span>
-                      <span>Falta uma oferta que mostre o valor do seu serviço</span>
+                    <div className="flex items-start gap-3 p-4 bg-red-900/20 rounded-lg hover:bg-red-900/30 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-red-500/20 group delay-100">
+                      <span className="text-red-400 text-xl group-hover:animate-pulse">❌</span>
+                      <span className="group-hover:text-gray-100 transition-colors duration-300">Falta uma oferta que mostre o valor do seu serviço</span>
                     </div>
-                    <div className="flex items-start gap-3 p-4 bg-red-900/20 rounded-lg">
-                      <span className="text-red-400 text-xl">❌</span>
-                      <span>Falta um posicionamento estratégico para te fazer visto como referência absoluta</span>
+                    <div className="flex items-start gap-3 p-4 bg-red-900/20 rounded-lg hover:bg-red-900/30 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-red-500/20 group delay-200">
+                      <span className="text-red-400 text-xl group-hover:animate-pulse">❌</span>
+                      <span className="group-hover:text-gray-100 transition-colors duration-300">Falta um posicionamento estratégico para te fazer visto como referência absoluta</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="text-center bg-gray-800/50 p-8 rounded-xl">
-                  <p className="text-xl mb-4">
+                <div className="text-center bg-gray-800/50 p-8 rounded-xl hover:bg-gray-800/70 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-gray-800/50 animate-fade-in-up delay-1600 group">
+                  <p className="text-xl mb-4 group-hover:text-gray-100 transition-colors duration-300">
                     Hoje, sua autoridade é <strong>jurídica</strong>.
                     <br />
-                    Mas o cliente compra <strong className="text-[#ffd200]">percepção de valor</strong>.
+                    Mas o cliente compra <strong className="text-[#ffd200] group-hover:animate-pulse">percepção de valor</strong>.
                   </p>
                   
-                  <p className="text-lg">
+                  <p className="text-lg group-hover:text-gray-100 transition-colors duration-300">
                     E por mais que você se esforce, hoje você ainda é visto <strong>como mais um</strong>…
                     <br />
-                    … e não como <strong className="text-[#ffd200]">o único caminho seguro</strong> para o resultado que ele quer.
+                    … e não como <strong className="text-[#ffd200] group-hover:animate-pulse">o único caminho seguro</strong> para o resultado que ele quer.
                   </p>
                 </div>
 
-                <div className="bg-gradient-to-r from-[#ffd200]/10 to-transparent p-8 rounded-xl border border-[#ffd200]/30">
+                <div className="bg-gradient-to-r from-[#ffd200]/10 to-transparent p-8 rounded-xl border border-[#ffd200]/30 hover:border-[#ffd200]/50 hover:bg-gradient-to-r hover:from-[#ffd200]/15 hover:to-transparent transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#ffd200]/10 animate-fade-in-up delay-1800">
                   <div className="space-y-4 text-white">
-                    <div className="flex items-center gap-2">
-                      <X className="text-red-500 w-6 h-6 flex-shrink-0" />
-                      <p className="text-lg">O problema <span className="font-bold">não</span> é o Google.</p>
+                    <div className="flex items-center gap-2 hover:translate-x-2 transition-transform duration-300 group">
+                      <X className="text-red-500 w-6 h-6 flex-shrink-0 group-hover:animate-pulse" />
+                      <p className="text-lg group-hover:text-gray-100">O problema <span className="font-bold">não</span> é o Google.</p>
                     </div>
                     
-                    <div className="flex items-center gap-2">
-                      <X className="text-red-500 w-6 h-6 flex-shrink-0" />
-                      <p className="text-lg">O problema <span className="font-bold">não</span> é o Instagram.</p>
+                    <div className="flex items-center gap-2 hover:translate-x-2 transition-transform duration-300 delay-100 group">
+                      <X className="text-red-500 w-6 h-6 flex-shrink-0 group-hover:animate-pulse" />
+                      <p className="text-lg group-hover:text-gray-100">O problema <span className="font-bold">não</span> é o Instagram.</p>
                     </div>
                     
-                    <div className="flex items-center gap-2">
-                      <X className="text-red-500 w-6 h-6 flex-shrink-0" />
-                      <p className="text-lg">O problema <span className="font-bold">não</span> é você.</p>
+                    <div className="flex items-center gap-2 hover:translate-x-2 transition-transform duration-300 delay-200 group">
+                      <X className="text-red-500 w-6 h-6 flex-shrink-0 group-hover:animate-pulse" />
+                      <p className="text-lg group-hover:text-gray-100">O problema <span className="font-bold">não</span> é você.</p>
                     </div>
 
-                    <div className="bg-[#ffd200]/20 p-4 rounded-lg mt-6">
-                      <p className="text-lg text-[#ffd200]">
+                    <div className="bg-[#ffd200]/20 p-4 rounded-lg mt-6 hover:bg-[#ffd200]/30 transition-all duration-300 hover:scale-105 group">
+                      <p className="text-lg text-[#ffd200] group-hover:text-[#ffdc33]">
                         O problema é a ausência de um <strong>modelo de crescimento previsível e lucrativo.</strong>
                       </p>
                     </div>
 
-                    <div className="mt-6 text-center mb-16">
-                      <p className="text-lg">
+                    <div className="mt-6 text-center mb-16 animate-fade-in-up delay-2000">
+                      <p className="text-lg hover:text-gray-100 transition-colors duration-300">
                         📝 E é exatamente isso que <strong>nós podemos te mostrar.</strong>
                       </p>
                     </div>
                   </div>
 
-                  <div className="text-center bg-green-900/20 p-8 rounded-xl border border-green-500/30 mt-8">
-                    <p className="text-xl font-bold text-green-400 mb-4">
+                  <div className="text-center bg-green-900/20 p-8 rounded-xl border border-green-500/30 mt-8 hover:border-green-400/50 hover:bg-green-900/30 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-green-500/20 animate-fade-in-up delay-2200 group">
+                    <p className="text-xl font-bold text-green-400 mb-4 group-hover:text-green-300 transition-colors duration-300">
                       ✅ Já ajudamos dezenas de advogados a crescer.
                     </p>
-                    <p className="text-lg">
+                    <p className="text-lg group-hover:text-gray-100 transition-colors duration-300">
                       E a boa notícia é: <strong>você pode acessar o mesmo caminho agora.</strong>
                     </p>
                   </div>
@@ -817,31 +827,33 @@ function App({ initialStep = 0 }: AppProps) {
           </div>
 
           {/* CTA Final */}
-          <div className="bg-gradient-to-r from-[#ffd200]/20 to-transparent py-16">
-            <div className="max-w-4xl mx-auto px-4 text-center">
-              <div className="mb-8">
-                <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <div className="bg-gradient-to-r from-[#ffd200]/20 to-transparent py-16 relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-green-500/5 via-transparent to-green-500/5 animate-pulse"></div>
+            <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
+              <div className="mb-8 animate-fade-in-up delay-2400">
+                <h3 className="text-3xl md:text-4xl font-bold text-white mb-4 hover:text-green-400 transition-colors duration-300">
                   💬 Quer aplicar isso no seu escritório?
                 </h3>
-                <p className="text-xl text-gray-300 mb-8">
+                <p className="text-xl text-gray-300 mb-8 hover:text-gray-100 transition-colors duration-300">
                   👇 Clique abaixo para falar com um especialista e agendar um horário:
                 </p>
               </div>
               
-              <div className="relative inline-block">
+              <div className="relative inline-block animate-fade-in-up delay-2600">
                 <div className="absolute -inset-2 bg-green-500/20 blur-lg rounded-xl animate-pulse"></div>
+                <div className="absolute -inset-4 bg-gradient-to-r from-green-500/10 to-transparent rounded-xl animate-ping"></div>
                 <a
                   href="https://wa.me/5511963443866?text=Ola%2C%20preenchi%20o%20Quiz%20e%20quero%20conhecer%20mais%20detalhes%20sobre%20a%20Assessoria%20em%20Marketing%20Jur%C3%ADdico%20da%20Digge"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative bg-green-600 text-white px-4 py-3 rounded-xl font-bold text-base hover:bg-green-700 transition-all duration-300 flex items-center gap-2 mx-auto shadow-xl transform hover:scale-105"
+                  className="relative bg-green-600 text-white px-6 py-4 rounded-xl font-bold text-lg hover:bg-green-700 transition-all duration-300 flex items-center gap-3 mx-auto shadow-xl transform hover:scale-110 hover:shadow-green-500/30 group"
                 >
-                  <MessageCircle className="w-5 h-5" />
+                  <MessageCircle className="w-6 h-6 group-hover:animate-bounce" />
                   Falar com um Especialista no WhatsApp
                 </a>
               </div>
 
-              <p className="text-gray-400 mt-6 text-sm">
+              <p className="text-gray-400 mt-6 text-sm hover:text-gray-300 transition-colors duration-300 animate-fade-in-up delay-2800">
                 🔒 Conversa 100% confidencial e sem compromisso
               </p>
             </div>
