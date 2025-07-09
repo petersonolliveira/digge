@@ -3,18 +3,7 @@ import { Calculator, ArrowRight, ArrowLeft, Phone, Mail, User, DollarSign, Trend
 import { useNavigate } from 'react-router-dom';
 import { addUTMsToLinks, getUTMParams } from './utmHandler';
 
-function Footer() {
-  return (
-    <div className="absolute bottom-0 left-0 right-0 p-4 flex flex-col items-center justify-center mb-12">
-      <img 
-        src="https://digge.com.br/wp-content/uploads/2024/11/Logo.png" 
-        alt="Digge Logo" 
-        className="h-6 mb-6"
-      />
-      <p className="text-gray-500 text-sm">CNPJ: 49.139.333/0001-95</p>
-    </div>
-  );
-}
+
 
 interface QuizData {
   area: string;
@@ -264,7 +253,6 @@ function App({ initialStep = 0 }: AppProps) {
             <ArrowRight className="w-5 h-5" />
           </button>
         </div>
-        <Footer />
       </div>
     );
   }
@@ -308,7 +296,6 @@ function App({ initialStep = 0 }: AppProps) {
             </button>
           </div>
         </div>
-        <Footer />
       </div>
     );
   }
@@ -362,7 +349,6 @@ function App({ initialStep = 0 }: AppProps) {
             </button>
           </div>
         </div>
-        <Footer />
       </div>
     );
   }
@@ -416,7 +402,6 @@ function App({ initialStep = 0 }: AppProps) {
             </button>
           </div>
         </div>
-        <Footer />
       </div>
     );
   }
@@ -463,7 +448,6 @@ function App({ initialStep = 0 }: AppProps) {
             </button>
           </div>
         </div>
-        <Footer />
       </div>
     );
   }
@@ -510,7 +494,6 @@ function App({ initialStep = 0 }: AppProps) {
             </button>
           </div>
         </div>
-        <Footer />
       </div>
     );
   }
@@ -556,7 +539,6 @@ function App({ initialStep = 0 }: AppProps) {
             </div>
           </div>
         </div>
-        <Footer />
       </div>
     );
   }
@@ -642,7 +624,6 @@ function App({ initialStep = 0 }: AppProps) {
             </button>
           </div>
         </div>
-        <Footer />
       </div>
     );
   }
@@ -815,14 +796,14 @@ function App({ initialStep = 0 }: AppProps) {
                       </p>
                     </div>
 
-                    <div className="mt-6 text-center mb-12">
+                    <div className="mt-6 text-center mb-16">
                       <p className="text-lg">
                         📝 E é exatamente isso que <strong>nós podemos te mostrar.</strong>
                       </p>
                     </div>
                   </div>
 
-                  <div className="text-center bg-green-900/20 p-8 rounded-xl border border-green-500/30">
+                  <div className="text-center bg-green-900/20 p-8 rounded-xl border border-green-500/30 mt-8">
                     <p className="text-xl font-bold text-green-400 mb-4">
                       ✅ Já ajudamos dezenas de advogados a crescer.
                     </p>
