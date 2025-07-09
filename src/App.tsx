@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Calculator, ArrowRight, ArrowLeft, Phone, Mail, User, DollarSign, TrendingUp, Scale, MessageCircle, CheckCircle, Target, Zap, Trophy } from 'lucide-react';
+import { Calculator, ArrowRight, ArrowLeft, Phone, Mail, User, DollarSign, TrendingUp, Scale, MessageCircle, CheckCircle, Target, Zap, Trophy, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { addUTMsToLinks, getUTMParams } from './utmHandler';
 
@@ -674,12 +674,9 @@ function App({ initialStep = 1 }: AppProps) {
               <div className="bg-red-900/30 p-6 rounded-xl border border-red-500/30">
                 <div className="text-center">
                   <div className="text-4xl mb-4">🛑</div>
-                  <p className="text-xl font-bold text-red-400 mb-2">
-                    VOCÊ ESTÁ DEIXANDO DINHEIRO NA MESA.
-                  </p>
-                  <p className="text-xl font-bold text-red-400">
-                    Todos. Os. Meses.
-                  </p>
+                  <h2 className="text-[#ff4444] text-2xl font-bold mb-2 text-center">
+                    VOCÊ ESTÁ DEIXANDO DINHEIRO NA MESA TODOS OS MESES.
+                  </h2>
                 </div>
               </div>
             </div>
@@ -722,40 +719,43 @@ function App({ initialStep = 1 }: AppProps) {
             </div>
 
             <div className="bg-gradient-to-r from-[#ffd200]/10 to-transparent p-8 rounded-xl border border-[#ffd200]/30">
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <span className="text-red-400 text-xl">❌</span>
-                  <span>O problema <strong>não é o Google.</strong></span>
+              <div className="space-y-4 text-white">
+                <div className="flex items-center gap-2">
+                  <X className="text-red-500 w-6 h-6 flex-shrink-0" />
+                  <p className="text-lg">O problema <span className="font-bold">não</span> é o Google.</p>
                 </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-red-400 text-xl">❌</span>
-                  <span>O problema <strong>não é o Instagram.</strong></span>
+                
+                <div className="flex items-center gap-2">
+                  <X className="text-red-500 w-6 h-6 flex-shrink-0" />
+                  <p className="text-lg">O problema <span className="font-bold">não</span> é o Instagram.</p>
                 </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-red-400 text-xl">❌</span>
-                  <span>O problema <strong>não é você.</strong></span>
+                
+                <div className="flex items-center gap-2">
+                  <X className="text-red-500 w-6 h-6 flex-shrink-0" />
+                  <p className="text-lg">O problema <span className="font-bold">não</span> é você.</p>
+                </div>
+
+                <div className="bg-[#ffd200]/20 p-4 rounded-lg mt-6">
+                  <p className="text-lg text-[#ffd200]">
+                    O problema é a ausência de um <strong>modelo de crescimento previsível e lucrativo.</strong>
+                  </p>
+                </div>
+
+                <div className="mt-6 text-center">
+                  <p className="text-lg">
+                    📝 E é exatamente isso que <strong>nós podemos te mostrar.</strong>
+                  </p>
                 </div>
               </div>
 
-              <div className="mt-6 p-4 bg-[#ffd200]/20 rounded-lg">
-                <p className="text-xl text-[#ffd200] font-bold flex items-center gap-2">
-                  <span>👉</span>
-                  O problema é a ausência de um <strong>modelo de crescimento previsível e lucrativo.</strong>
+              <div className="text-center bg-green-900/20 p-8 rounded-xl border border-green-500/30">
+                <p className="text-xl font-bold text-green-400 mb-4">
+                  ✅ Já ajudamos dezenas de advogados a crescer.
+                </p>
+                <p className="text-lg">
+                  E a boa notícia é: <strong>você pode acessar o mesmo caminho agora.</strong>
                 </p>
               </div>
-
-              <p className="text-xl mt-6 text-center">
-                📈 E é exatamente isso que <strong>nós podemos te mostrar.</strong>
-              </p>
-            </div>
-
-            <div className="text-center bg-green-900/20 p-8 rounded-xl border border-green-500/30">
-              <p className="text-xl font-bold text-green-400 mb-4">
-                ✅ Já ajudamos dezenas de advogados a crescer.
-              </p>
-              <p className="text-lg">
-                E a boa notícia é: <strong>você pode acessar o mesmo caminho agora.</strong>
-              </p>
             </div>
           </div>
         </div>
@@ -775,13 +775,15 @@ function App({ initialStep = 1 }: AppProps) {
           
           <div className="relative inline-block">
             <div className="absolute -inset-2 bg-green-500/20 blur-lg rounded-xl animate-pulse"></div>
-            <button
-              onClick={handleWhatsAppClick}
+            <a
+              href="https://wa.me/5511963443866?text=Ola%2C%20preenchi%20o%20Quiz%20e%20quero%20conhecer%20mais%20detalhes%20sobre%20a%20Assessoria%20em%20Marketing%20Jur%C3%ADdico%20da%20Digge"
+              target="_blank"
+              rel="noopener noreferrer"
               className="relative bg-green-600 text-white px-8 py-6 rounded-xl font-bold text-xl hover:bg-green-700 transition-all duration-300 flex items-center gap-3 mx-auto shadow-2xl transform hover:scale-105"
             >
               <MessageCircle className="w-8 h-8" />
               Falar com um Especialista no WhatsApp
-            </button>
+            </a>
           </div>
 
           <p className="text-gray-400 mt-6 text-sm">
