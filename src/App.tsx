@@ -835,7 +835,7 @@ function App({ initialStep = 0 }: AppProps) {
                   className="bg-green-600 text-white px-6 py-4 rounded-xl font-bold text-lg hover:bg-green-700 transition-colors duration-300 flex items-center gap-3 mx-auto shadow-xl"
                 >
                   <MessageCircle className="w-6 h-6" />
-                  Agendar Diagnóstico
+                  Falar com um Especialista no WhatsApp
                 </a>
               </div>
 
