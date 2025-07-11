@@ -8,9 +8,12 @@ import { addUTMsToLinks, getUTMParams } from './utmHandler';
 interface QuizData {
   area: string;
   investimento: number;
+  investimento_texto: string;
   ticket: number;
+  ticket_texto: string;
   taxa_conversao: number;
   faturamento_atual: number;
+  faturamento_texto: string;
   nome: string;
   whatsapp: string;
   email: string;
@@ -21,14 +24,14 @@ interface AppProps {
 }
 
 const AREA_CPL_MAP: Record<string, number> = {
-  'PREVIDENCIÁRIO': 22.06,
-  'BANCÁRIO/CONSUMIDOR': 33.12,
-  'TRABALHISTA': 25,
-  'FAMÍLIA': 57.94,
-  'CRIMINAL': 87.35,
-  'TRIBUTÁRIO': 56.71,
-  'EMPRESARIAL': 64.76,
-  'OUTROS': 22.06,
+  'Previdenciário': 22.06,
+  'Bancário/Consumidor': 33.12,
+  'Trabalhista': 25,
+  'Família': 57.94,
+  'Criminal': 87.35,
+  'Tributário': 56.71,
+  'Empresarial': 64.76,
+  'Outros': 22.06,
 };
 
 const FATURAMENTO_MAP: Record<string, number> = {
@@ -41,9 +44,9 @@ const FATURAMENTO_MAP: Record<string, number> = {
 };
 
 const TAXA_CONVERSAO_MAP: Record<string, number> = {
-  'Excelente': 0.35,
-  'Boa': 0.24,
-  'Ruim': 0.12,
+  'Acima de 4 Contratos': 0.35,
+  'De 2 a 3 Contratos': 0.24,
+  'De 0 a 2 Contratos': 0.12,
 };
 
 function App({ initialStep = 0 }: AppProps) {
@@ -57,9 +60,12 @@ function App({ initialStep = 0 }: AppProps) {
   const [quizData, setQuizData] = useState<QuizData>({
     area: '',
     investimento: 0,
+    investimento_texto: '',
     ticket: 0,
+    ticket_texto: '',
     taxa_conversao: 0,
     faturamento_atual: 0,
+    faturamento_texto: '',
     nome: '',
     whatsapp: '',
     email: '',
@@ -100,11 +106,31 @@ function App({ initialStep = 0 }: AppProps) {
     };
   };
 
+  const formatFirstLetterUpperCase = (text: string) => {
+    return text.split(' ').map(word => {
+      if (word.includes('/')) {
+        return word.split('/').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join('/');
+      }
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    }).join(' ');
+  };
+
   const sendWebhook = async () => {
     try {
       const utmParams = getUTMParams();
+      const results = calculateResults();
+      const valorDeixadoFormatado = formatCurrency(results.valorDeixadoNaMesa);
+
       const payload = {
-        ...quizData,
+        area: formatFirstLetterUpperCase(quizData.area),
+        investimento: quizData.investimento_texto,
+        ticket: quizData.ticket_texto,
+        taxa_conversao: quizData.taxa_conversao,
+        faturamento: quizData.faturamento_texto,
+        valor_deixado_na_mesa: valorDeixadoFormatado,
+        nome: quizData.nome,
+        whatsapp: quizData.whatsapp,
+        email: quizData.email,
         ...utmParams,
         url: window.location.href,
         timestamp: new Date().toISOString()
@@ -276,7 +302,7 @@ function App({ initialStep = 0 }: AppProps) {
               <button
                 key={area}
                 onClick={() => {
-                  setQuizData({ ...quizData, area });
+                  setQuizData({ ...quizData, area: area });
                   nextStep();
                 }}
                 className="bg-gray-800 text-white p-4 rounded-lg hover:bg-gray-700 transition-colors text-left border border-gray-700 hover:border-[#ffd200]"
@@ -325,7 +351,12 @@ function App({ initialStep = 0 }: AppProps) {
                 onChange={(e) => {
                   const formatted = formatCurrencyInput(e.target.value);
                   setInvestimentoDisplay(formatted);
-                  setQuizData({ ...quizData, investimento: parseCurrencyInput(e.target.value) });
+                  const numericValue = parseCurrencyInput(e.target.value);
+                  setQuizData({ 
+                    ...quizData, 
+                    investimento: numericValue,
+                    investimento_texto: formatted 
+                  });
                 }}
                 className="w-full p-4 bg-gray-700 text-white rounded-lg border border-gray-600 focus:border-[#ffd200] focus:outline-none text-lg"
               />
@@ -378,7 +409,12 @@ function App({ initialStep = 0 }: AppProps) {
                 onChange={(e) => {
                   const formatted = formatCurrencyInput(e.target.value);
                   setTicketDisplay(formatted);
-                  setQuizData({ ...quizData, ticket: parseCurrencyInput(e.target.value) });
+                  const numericValue = parseCurrencyInput(e.target.value);
+                  setQuizData({ 
+                    ...quizData, 
+                    ticket: numericValue,
+                    ticket_texto: formatted 
+                  });
                 }}
                 className="w-full p-4 bg-gray-700 text-white rounded-lg border border-gray-600 focus:border-[#ffd200] focus:outline-none text-lg"
               />
@@ -424,18 +460,33 @@ function App({ initialStep = 0 }: AppProps) {
           </div>
 
           <div className="space-y-4">
-            {Object.entries(TAXA_CONVERSAO_MAP).map(([label, value]) => (
-              <button
-                key={label}
-                onClick={() => {
-                  setQuizData({ ...quizData, taxa_conversao: value });
-                  nextStep();
-                }}
-                className="w-full bg-gray-800 text-white p-4 rounded-lg hover:bg-gray-700 transition-colors text-left border border-gray-700 hover:border-[#ffd200]"
-              >
-                {label}
-              </button>
-            ))}
+            <button
+              onClick={() => {
+                setQuizData({ ...quizData, taxa_conversao: 0.35 });
+                nextStep();
+              }}
+              className="w-full bg-gray-800 text-white p-4 rounded-lg hover:bg-gray-700 transition-colors text-left border border-gray-700 hover:border-[#ffd200]"
+            >
+              Acima de 4 Contratos
+            </button>
+            <button
+              onClick={() => {
+                setQuizData({ ...quizData, taxa_conversao: 0.24 });
+                nextStep();
+              }}
+              className="w-full bg-gray-800 text-white p-4 rounded-lg hover:bg-gray-700 transition-colors text-left border border-gray-700 hover:border-[#ffd200]"
+            >
+              De 2 a 3 Contratos
+            </button>
+            <button
+              onClick={() => {
+                setQuizData({ ...quizData, taxa_conversao: 0.12 });
+                nextStep();
+              }}
+              className="w-full bg-gray-800 text-white p-4 rounded-lg hover:bg-gray-700 transition-colors text-left border border-gray-700 hover:border-[#ffd200]"
+            >
+              De 0 a 2 Contratos
+            </button>
           </div>
           
           <div className="mt-8 text-center">
@@ -474,7 +525,11 @@ function App({ initialStep = 0 }: AppProps) {
               <button
                 key={label}
                 onClick={() => {
-                  setQuizData({ ...quizData, faturamento_atual: value });
+                  setQuizData({ 
+                    ...quizData, 
+                    faturamento_atual: value,
+                    faturamento_texto: label
+                  });
                   startLoading();
                 }}
                 className="w-full bg-gray-800 text-white p-4 rounded-lg hover:bg-gray-700 transition-colors text-left border border-gray-700 hover:border-[#ffd200]"
