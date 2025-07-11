@@ -12,6 +12,7 @@ interface QuizData {
   ticket: number;
   ticket_texto: string;
   taxa_conversao: number;
+  taxa_conversao_texto: string;
   faturamento_atual: number;
   faturamento_texto: string;
   nome: string;
@@ -64,6 +65,7 @@ function App({ initialStep = 0 }: AppProps) {
     ticket: 0,
     ticket_texto: '',
     taxa_conversao: 0,
+    taxa_conversao_texto: '',
     faturamento_atual: 0,
     faturamento_texto: '',
     nome: '',
@@ -125,9 +127,10 @@ function App({ initialStep = 0 }: AppProps) {
         area: formatFirstLetterUpperCase(quizData.area),
         investimento: quizData.investimento_texto,
         ticket: quizData.ticket_texto,
-        taxa_conversao: quizData.taxa_conversao,
+        taxa_conversao: quizData.taxa_conversao_texto,
         faturamento: quizData.faturamento_texto,
         valor_deixado_na_mesa: valorDeixadoFormatado,
+        possiveis_contratos: results.contratosPosse,
         nome: quizData.nome,
         whatsapp: quizData.whatsapp,
         email: quizData.email,
@@ -462,7 +465,11 @@ function App({ initialStep = 0 }: AppProps) {
           <div className="space-y-4">
             <button
               onClick={() => {
-                setQuizData({ ...quizData, taxa_conversao: 0.35 });
+                setQuizData({ 
+                  ...quizData, 
+                  taxa_conversao: 0.35,
+                  taxa_conversao_texto: 'Acima de 4 Contratos'
+                });
                 nextStep();
               }}
               className="w-full bg-gray-800 text-white p-4 rounded-lg hover:bg-gray-700 transition-colors text-left border border-gray-700 hover:border-[#ffd200]"
@@ -471,7 +478,11 @@ function App({ initialStep = 0 }: AppProps) {
             </button>
             <button
               onClick={() => {
-                setQuizData({ ...quizData, taxa_conversao: 0.24 });
+                setQuizData({ 
+                  ...quizData, 
+                  taxa_conversao: 0.24,
+                  taxa_conversao_texto: 'De 2 a 3 Contratos'
+                });
                 nextStep();
               }}
               className="w-full bg-gray-800 text-white p-4 rounded-lg hover:bg-gray-700 transition-colors text-left border border-gray-700 hover:border-[#ffd200]"
@@ -480,7 +491,11 @@ function App({ initialStep = 0 }: AppProps) {
             </button>
             <button
               onClick={() => {
-                setQuizData({ ...quizData, taxa_conversao: 0.12 });
+                setQuizData({ 
+                  ...quizData, 
+                  taxa_conversao: 0.12,
+                  taxa_conversao_texto: 'De 0 a 2 Contratos'
+                });
                 nextStep();
               }}
               className="w-full bg-gray-800 text-white p-4 rounded-lg hover:bg-gray-700 transition-colors text-left border border-gray-700 hover:border-[#ffd200]"
